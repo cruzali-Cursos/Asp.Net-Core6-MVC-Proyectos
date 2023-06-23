@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Aprende_ASPNETCoreMVC6.Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aprende_ASPNETCoreMVC6
 {
@@ -8,5 +9,10 @@ namespace Aprende_ASPNETCoreMVC6
         {
 
         }
+
+        
+
+        // Se indica que Tarea es una entidad
+        public DbSet<Tarea> Tareas { get; set; }
     }
 }
