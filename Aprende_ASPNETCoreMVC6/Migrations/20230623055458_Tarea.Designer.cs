@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Aprende_ASPNETCoreMVC6.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230623052653_Tareas")]
-    partial class Tareas
+    [Migration("20230623055458_Tarea")]
+    partial class Tarea
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,9 @@ namespace Aprende_ASPNETCoreMVC6.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Titulo")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("Id");
 

@@ -10,6 +10,13 @@ namespace Aprende_ASPNETCoreMVC6
 
         }
 
+        // API FLUENT
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<Tarea>().Property(t => t.Titulo).HasMaxLength(250).IsRequired();
+        }
         
 
         // Se indica que Tarea es una entidad
