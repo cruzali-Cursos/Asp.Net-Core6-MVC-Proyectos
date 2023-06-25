@@ -22,5 +22,6 @@ namespace Aprende_ASPNETCoreMVC6
         // Se indica que Tarea es una entidad
         public DbSet<Tarea> Tareas { get; set; }
         public DbSet<Paso> Pasos { get; set; }
+        public DbSet<ArchivoAdjunto> ArchivosAdjuntos { get; set; }
     }
 }

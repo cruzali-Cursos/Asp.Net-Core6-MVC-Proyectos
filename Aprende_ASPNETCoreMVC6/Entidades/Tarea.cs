@@ -15,6 +15,7 @@ namespace Aprende_ASPNETCoreMVC6.Entidades
 
         // Propiedad de navegacion
         public List<Paso> Pasos { get; set; }
+        public List<ArchivoAdjunto>  ArchivosAdjuntos { get; set; }
 
     }
 }
