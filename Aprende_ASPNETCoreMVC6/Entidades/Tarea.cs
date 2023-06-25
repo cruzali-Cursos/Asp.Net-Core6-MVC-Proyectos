@@ -13,5 +13,8 @@ namespace Aprende_ASPNETCoreMVC6.Entidades
         public int Orden { get; set; }
         public DateTime FechaCreacion { get; set; }
 
+        // Propiedad de navegacion
+        public List<Paso> Pasos { get; set; }
+
     }
 }
