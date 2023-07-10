@@ -1,1 +1,7 @@
 password: aA123456!
+
+app cte id: 26288002-1e24-4ffe-bdf9-41e938eb6e7c
+
+sec: uOa8Q~5B2LPsHutUhpoIvKTxq9W4vp-C~BW88cBu
+
+

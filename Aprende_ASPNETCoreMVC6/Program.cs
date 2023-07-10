@@ -22,7 +22,11 @@ builder.Services.AddDbContext<AppDbContext>(opciones => opciones.UseSqlServer("n
 
 // Identity
 // Activar servicios de autenticacion
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication().AddMicrosoftAccount(opciones =>
+{
+    opciones.ClientId = builder.Configuration["MicrosoftClientId"];
+    opciones.ClientSecret = builder.Configuration["MicrosoftSecretId"];
+});
 
 // Agregar el sistema de Identity como tal
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(opciones =>
