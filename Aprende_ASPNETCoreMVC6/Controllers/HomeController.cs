@@ -1,4 +1,5 @@
 ﻿using Aprende_ASPNETCoreMVC6.Models;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using System.Diagnostics;
@@ -22,9 +23,15 @@ namespace Aprende_ASPNETCoreMVC6.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult CambiarIdioma(string cultura, string urlRetorno)
         {
-            return View();
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cultura)),
+                    new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(5) }
+                    );
+
+            return LocalRedirect(urlRetorno);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

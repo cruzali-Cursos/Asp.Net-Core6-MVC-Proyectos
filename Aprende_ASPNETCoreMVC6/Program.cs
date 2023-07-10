@@ -1,4 +1,5 @@
 using Aprende_ASPNETCoreMVC6;
+using Aprende_ASPNETCoreMVC6.Servicios;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -58,13 +59,13 @@ builder.Services.AddLocalization(opciones =>
 
 var app = builder.Build();
 
-var culturasUISoportadas = new[] { "es", "en" };
+// var culturasUISoportadas = new[] { "es", "en" };
 
 app.UseRequestLocalization(opciones =>
 {
     opciones.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es");
-    opciones.SupportedUICultures = culturasUISoportadas
-        .Select(cultura => new System.Globalization.CultureInfo(cultura)).ToList();
+    opciones.SupportedUICultures = Constantes.CulturasUISoportadas
+        .Select(cultura => new System.Globalization.CultureInfo(cultura.Value)).ToList();
 });
 
 
