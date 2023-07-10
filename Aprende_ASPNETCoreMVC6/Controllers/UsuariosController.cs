@@ -1,4 +1,5 @@
 ﻿using Aprende_ASPNETCoreMVC6.Models;
+using Aprende_ASPNETCoreMVC6.Servicios;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -188,6 +189,39 @@ namespace Aprende_ASPNETCoreMVC6.Controllers
             modelo.Mensaje = mensaje;            
             return View(modelo);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> HacerAdmin(string email)
+        {
+            // El default para una referencia es NULL
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+
+            if (usuario is null)
+            {
+                return NotFound();
+            }
+
+            await userManager.AddToRoleAsync(usuario, Constantes.RolAdmin);
+
+            return RedirectToAction("Listado", routeValues: new 
+                { mensaje = "Rol asignado correctamente a " + email });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoverAdmin(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+
+            if (usuario is null)
+            {
+                return NotFound();
+            }
+
+            await userManager.RemoveFromRoleAsync(usuario, Constantes.RolAdmin);
+
+            return RedirectToAction("Listado", routeValues: new { mensaje = "Rol removido correctamente a " } + email);
+        }
+
 
 
     }
