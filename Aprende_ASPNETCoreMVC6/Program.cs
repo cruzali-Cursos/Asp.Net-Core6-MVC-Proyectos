@@ -13,10 +13,15 @@ var politicaUsuariosAutenticados = new AuthorizationPolicyBuilder()
             .Build();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(opciones => 
+builder.Services.AddControllersWithViews(opciones =>
 {
     opciones.Filters.Add(new AuthorizeFilter(politicaUsuariosAutenticados));
-}).AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix);
+}).AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization(opciones =>
+    {
+        // Técnica para utilizar un unico archivo de recursos para traducir las anotaciones de datos.
+        opciones.DataAnnotationLocalizerProvider = (_, factoria) => factoria.Create(typeof(RecursoCompartido));
+    });
 
 builder.Services.AddDbContext<AppDbContext>(opciones => opciones.UseSqlServer("name=DefaultConnection"));
 
