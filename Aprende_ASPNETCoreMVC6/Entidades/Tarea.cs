@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Aprende_ASPNETCoreMVC6.Entidades
 {
@@ -12,6 +13,11 @@ namespace Aprende_ASPNETCoreMVC6.Entidades
         public string Descripcion { get; set; }
         public int Orden { get; set; }
         public DateTime FechaCreacion { get; set; }
+
+        // Relacion entre Tarea y Usuario
+        public string UsuarioCreacionId { get; set; }
+        // Propiedad de navegacion
+        public IdentityUser UsuarioCreacion { get; set; }
 
         // Propiedad de navegacion
         public List<Paso> Pasos { get; set; }
