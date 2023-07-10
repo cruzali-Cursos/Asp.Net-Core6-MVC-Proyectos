@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Aprende_ASPNETCoreMVC6.Controllers
@@ -11,12 +12,16 @@ namespace Aprende_ASPNETCoreMVC6.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly AppDbContext context;
 
         // En la clase program se especificó que se usa IdentityUser
-        public UsuariosController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        // Se Inyecta el ApplicationDbContext
+        public UsuariosController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
+                AppDbContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.context = context;
         }
 
         [AllowAnonymous]
@@ -169,6 +174,20 @@ namespace Aprende_ASPNETCoreMVC6.Controllers
             return RedirectToAction("login", routeValues: new { mensaje });
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Listado(string mensaje = null)
+        {
+            var usuarios = await context.Users.Select(u => new UsuarioViewModel
+            {
+                Email = u.Email
+            }).ToListAsync();
+
+            var modelo = new UsuariosListadoViewModel();
+            modelo.Usuarios = usuarios;
+            modelo.Mensaje = mensaje;            
+            return View(modelo);
+        }
 
 
     }
