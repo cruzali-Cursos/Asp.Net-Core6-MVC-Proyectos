@@ -40,6 +40,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opciones =>
 builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme,
     opciones =>
     {
+        // Se redirecciona cuando un usuario no tiene permisos
         opciones.LoginPath = "/usuarios/login";
         opciones.AccessDeniedPath = "/usuarios/login";
     });

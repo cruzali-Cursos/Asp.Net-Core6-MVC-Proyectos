@@ -177,6 +177,7 @@ namespace Aprende_ASPNETCoreMVC6.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = Constantes.RolAdmin)]
         public async Task<IActionResult> Listado(string mensaje = null)
         {
             var usuarios = await context.Users.Select(u => new UsuarioViewModel
@@ -191,6 +192,7 @@ namespace Aprende_ASPNETCoreMVC6.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Constantes.RolAdmin)]
         public async Task<IActionResult> HacerAdmin(string email)
         {
             // El default para una referencia es NULL
@@ -208,6 +210,7 @@ namespace Aprende_ASPNETCoreMVC6.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Constantes.RolAdmin)]
         public async Task<IActionResult> RemoverAdmin(string email)
         {
             var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
