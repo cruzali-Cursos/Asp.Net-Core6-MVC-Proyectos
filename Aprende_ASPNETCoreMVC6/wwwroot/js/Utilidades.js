@@ -1,4 +1,1 @@
-﻿function mostrarError() {
-    alert(mensajeDeError);
-}
-
+﻿
