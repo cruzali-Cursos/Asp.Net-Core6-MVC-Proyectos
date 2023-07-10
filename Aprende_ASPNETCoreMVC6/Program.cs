@@ -46,9 +46,22 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
     });
 
 // IStringLocalizer
-builder.Services.AddLocalization();
+builder.Services.AddLocalization(opciones =>
+{
+    opciones.ResourcesPath = "Recursos";
+});
 
 var app = builder.Build();
+
+var culturasUISoportadas = new[] { "es", "en" };
+
+app.UseRequestLocalization(opciones =>
+{
+    opciones.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es");
+    opciones.SupportedUICultures = culturasUISoportadas
+        .Select(cultura => new System.Globalization.CultureInfo(cultura)).ToList();
+});
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
